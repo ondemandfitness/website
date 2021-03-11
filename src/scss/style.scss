@@ -1,0 +1,154 @@
+@mixin font($font_name, $file_name, $weight, $style) {
+  @font-face {
+  font-family: $font_name;
+  font-display: swap;
+  src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2");
+  font-weight: #{$weight};
+  font-style: #{$style};
+  }
+}
+
+// TODO: 1440 and less
+// TODO: favicon
+
+@import 'fonts';
+
+body {
+  font-family: "Montserrat";
+  background-color: #F3F2FF;
+  font-size: 20px;
+}
+
+.container {
+  max-width: 1520px;
+  padding: 70px 200px 35px;
+  margin: 0 auto;
+}
+
+p {
+  color: #696E75;
+  line-height: 36px;
+}
+
+h1 {
+  font-size: 60px;
+  font-weight: 700;
+  @media (max-width: 1440px) {
+    font-size: 50px;
+  }
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: 600;;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Header
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .contacts {
+    display: flex;
+    & > a {
+      margin: auto auto auto 70px;
+      @media (max-width: 1440px) {
+        margin-left: 30px;
+      }
+    }
+    img {
+      margin: 0 10px -3px 0;
+    }
+  }
+}
+
+// Main
+.main {
+  display: flex;
+  margin-top: 80px;
+  .text-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+  .app-links {
+    display: flex;
+    margin-left: 70px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #696E75;
+    & > * {
+      margin: auto 15px;
+    }
+  }
+  .text {
+    padding-right: 50px;
+    max-width: 780px;
+  }
+  @media (max-width: 1440px) {
+    .phone {
+      max-width: 410px;
+    }
+  }
+}
+
+// Workout
+.workout {
+  display: flex;
+  margin-top: 200px;
+  .text-row {
+    padding-right: 20px;
+    width: 100%;
+  }
+  .text {
+    max-width: 615px;
+  }
+  .phone-1 {
+    text-align: right;
+    padding-top: 70px;
+  }
+  .phone-2 {
+    margin-top: 180px;
+  }
+}
+
+// Benefits
+.benefits {
+  margin-top: 180px;
+  .text {
+    max-width: 615px;
+  }
+  .phones {
+    margin-top: 100px;
+    text-align: center;
+    img {
+      margin: 0 30px;
+    }
+  }
+}
+
+// Congratulations
+.congratulations {
+  margin-top: 180px;
+  text-align: center;
+  p {
+    max-width: 370px;
+    margin: 0 auto 100px;
+  }
+}
+
+// Footer
+.footer {
+  text-align: center;
+  margin-top: 180px;
+}
