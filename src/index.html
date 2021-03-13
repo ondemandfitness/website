@@ -5,36 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.min.css" />
-    <title>Gulp</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <title>OnDemand Fitness</title>
   </head>
   <body>
     <div class="container">
-      @@include('_header.html') @@include('_main.html')
-      @@include('_workout.html') @@include('_benefits.html')
-      @@include('_congratulations.html') @@include('_footer.html')
+      @@include('_header.html')
+      @@include('_main.html')
+      @@include('_workout.html')
+      @@include('_benefits.html')
+      @@include('_congratulations.html')
+      @@include('_footer.html')
     </div>
     <script>
-      function testWebP(callback) {
-        var webP = new Image()
-        webP.onload = webP.onerror = function () {
-          callback(webP.height == 2)
-        }
-        webP.src =
-          'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA'
-      }
-
-      testWebP(function (support) {
-        if (support == true) {
-          document.querySelector('body').classList.add('webp')
-        } else {
-          document.querySelector('body').classList.add('no-webp')
-        }
-      })
-      function ok() {
-        const yearEl = document.getElementById('year')
-        const currentYear = new Date().getFullYear()
-        yearEl.innerText = 'currentYear'
-      }
+      /* is browser support webp */
+      (() => {
+        const webp = new Image();
+        webp.onload = webp.onerror = () => {
+          const bodyClass = webp.height === 2 ? 'webp' : 'no-webp';
+          document.querySelector('body').classList.add(bodyClass);
+        };
+        webp.src = "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA";
+      })();
+      
+      /* dynamic year */
+      (() => {
+        const yearEl = document.getElementById('year');
+        const currentYear = new Date().getFullYear();
+        yearEl.innerText = currentYear;
+      })();
     </script>
   </body>
 </html>

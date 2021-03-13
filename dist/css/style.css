@@ -26,22 +26,27 @@ body {
   font-family: "Montserrat";
   background-color: #F3F2FF;
   font-size: 20px;
+  overflow-x: hidden;
+  margin: 0;
 }
 
 .container {
-  max-width: 1520px;
-  padding: 70px 200px 35px;
+  max-width: 335px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin: 0 auto;
 }
 
 p {
   color: #696E75;
   line-height: 36px;
+  font-size: 18px;
 }
 
 h1 {
-  font-size: 60px;
   font-weight: 700;
+  font-size: 33px;
+  margin-bottom: 0;
 }
 
 h2 {
@@ -60,22 +65,33 @@ a:hover {
 }
 
 .header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  position: relative;
+  display: block;
+  text-align: right;
+}
+
+.header .logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: 60px;
 }
 
 .header .contacts {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-top: 10px;
 }
 
 .header .contacts > a {
-  margin: auto auto auto 70px;
+  margin: auto;
+  width: 100%;
+  line-height: 40px;
 }
 
 .header .contacts img {
@@ -86,7 +102,9 @@ a:hover {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 80px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-top: 60px;
 }
 
 .main .text-row {
@@ -101,94 +119,320 @@ a:hover {
       -ms-flex-pack: center;
           justify-content: center;
   width: 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .main .app-links {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-left: 70px;
+  margin: 15px auto 60px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 325px;
+  width: 100%;
+}
+
+.main .app-links .text {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   font-size: 30px;
   font-weight: 600;
   color: #696E75;
 }
 
 .main .app-links > * {
-  margin: auto 15px;
+  margin: 0;
 }
 
 .main .text {
-  padding-right: 50px;
   max-width: 780px;
+  padding-right: 0;
+}
+
+.main .phone {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .workout {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-top: 200px;
+  margin-top: 60px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .workout .text-row {
-  padding-right: 20px;
   width: 100%;
 }
 
-.workout .text {
-  max-width: 615px;
+.workout .phones {
+  margin-top: 30px;
+  padding-top: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-.workout .phone-1 {
-  text-align: right;
-  padding-top: 70px;
+.workout .phones :is(.phone-1, .phone-2) {
+  width: 100%;
 }
 
 .workout .phone-2 {
-  margin-top: 180px;
+  margin-top: -60px;
 }
 
 .benefits {
-  margin-top: 180px;
-}
-
-.benefits .text {
-  max-width: 615px;
+  margin-top: 60px;
 }
 
 .benefits .phones {
-  margin-top: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 40px;
   text-align: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.benefits .phones img {
-  margin: 0 30px;
+.benefits .phones :is(.phone-1, .phone-2) {
+  max-width: 160px;
 }
 
 .congratulations {
-  margin-top: 180px;
+  margin-top: 60px;
   text-align: center;
 }
 
+.congratulations .phone {
+  width: 100%;
+}
+
 .congratulations p {
-  max-width: 370px;
-  margin: 0 auto 100px;
+  max-width: 230px;
+  margin: 0 auto 40px;
 }
 
 .footer {
   text-align: center;
-  margin-top: 180px;
+  margin-top: 60px;
 }
 
-@media (max-width: 1440px) {
+.footer p {
+  margin-bottom: 0px;
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    padding-top: 70px;
+    max-width: 884px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  .header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+
+  .header .logo {
+    position: inherit;
+    max-width: 100%;
+  }
+
+  .main {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+  }
+
+  .main .text-row {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    padding-right: 20px;
+  }
+
+  .workout .text {
+    max-width: 560px;
+  }
+
+  .workout .text-2 {
+    max-width: 510px;
+  }
+
+  .workout .phones {
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+    padding-top: 30px;
+  }
+
+  .workout .phones .phone-1 {
+    margin-right: 20px;
+  }
+
+  .workout .phones .phone-2 {
+    margin-left: 20px;
+  }
+
+  .workout .phone-2 {
+    margin-top: -140px;
+  }
+
+  .benefits .text {
+    max-width: 545px;
+  }
+
+  .benefits .phones {
+    margin-top: 70px;
+  }
+
+  .benefits .phones :is(.phone-1, .phone-2) {
+    max-width: 420px;
+  }
+
+  .congratulations .phone {
+    max-width: 570px;
+    margin-top: 60px;
+  }
+
+  .congratulations p {
+    max-width: 340px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .container {
+    max-width: 1080px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
   h1 {
     font-size: 50px;
+  }
+
+  .main .text-row {
+    padding-right: 115px;
+  }
+
+  .main .app-links {
+    margin-left: 95px;
+  }
+
+  .workout {
+    margin-top: 180px;
+  }
+
+  .workout .text {
+    max-width: 615px;
+  }
+
+  .workout .text-2 {
+    max-width: 100%;
+  }
+
+  .workout .phones .phone-1 {
+    margin-right: 40px;
+  }
+
+  .workout .phones .phone-2 {
+    margin-left: 40px;
+  }
+
+  .benefits {
+    margin-top: 180px;
+  }
+
+  .benefits .text {
+    max-width: 615px;
+  }
+
+  .benefits .phones :is(.phone-1, .phone-2) {
+    max-width: 510px;
+  }
+
+  .congratulations {
+    margin-top: 180px;
+  }
+
+  .footer {
+    margin-top: 180px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    max-width: 1080px;
+  }
+
+  .header .contacts {
+    display: block;
   }
 
   .header .contacts > a {
     margin-left: 30px;
   }
+}
 
+@media screen and (min-width: 1920px) {
+  .container {
+    max-width: 1400px;
+  }
+
+  h1 {
+    font-size: 60px;
+  }
+
+  .workout .phones {
+    padding-top: 80px;
+  }
+
+  .workout .phones :is(.phone-1, .phone-2) {
+    max-width: 465px;
+  }
+
+  .benefits .phones {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+
+  .benefits .phones :is(.phone-1, .phone-2) {
+    max-width: 100%;
+    padding: 0 40px;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1920px) {
   .main .phone {
     max-width: 410px;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
+  .workout .phones :is(.phone-1, .phone-2) {
+    max-width: 300px;
   }
 }

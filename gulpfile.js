@@ -1,9 +1,6 @@
-let projectFolder = "dist";
-let sourceFolder = "src";
+const projectFolder = "dist";
+const sourceFolder = "src";
 const fs = require('fs')
-
-// TODO: refactoring
-// TODO: fix webp plugin
 
 const path = {
   build: {
@@ -11,12 +8,14 @@ const path = {
     css: projectFolder + '/css/',
     img: projectFolder + '/img/',
     fonts: projectFolder + '/fonts/',
+    favicons: projectFolder + '/favicon/'
   },
   src: {
     html: [sourceFolder + '/*.html', '!' + sourceFolder + '/_*.html'],
     css: sourceFolder + '/scss/style.scss',
     img: sourceFolder + '/img/**/*.{jpg,png,svg,gif,icon,webp}',
     fonts: sourceFolder + '/fonts/*.ttf',
+    favicons: sourceFolder + '/favicon/*.{png,xml,ico,svg,webmanifest}'
   },
   watch: {
     html: sourceFolder + '/**/*.html',
@@ -26,11 +25,8 @@ const path = {
   clean: "./" + projectFolder + "/"
 }
 
-const {
-  src,
-  dest
-} = require('gulp'),
-  gulp = require('gulp'),
+const gulp = require('gulp'),
+  { src, dest } = gulp,
   browsersync = require('browser-sync').create(),
   fileinclude = require('gulp-file-include'),
   del = require('del'),
@@ -46,7 +42,7 @@ const {
   ttf2woff = require('gulp-ttf2woff'),
   ttf2woff2 = require('gulp-ttf2woff2');
 
-function html() {
+const html = () => {
   return src(path.src.html)
     .pipe(fileinclude())
     .pipe(webphtml())
@@ -54,7 +50,12 @@ function html() {
     .pipe(browsersync.stream())
 }
 
-function images() {
+const favicons = () => {
+  return src(path.src.favicons)
+    .pipe(dest(path.build.favicons))
+}
+
+const images = () => {
   return src(path.src.img)
     .pipe(
       webp({
@@ -77,7 +78,7 @@ function images() {
     .pipe(browsersync.stream())
 }
 
-function css() {
+const css = () => {
   return src(path.src.css)
     .pipe(
       scss({
@@ -103,7 +104,7 @@ function css() {
     .pipe(browsersync.stream())
 }
 
-function fonts(params) {
+const fonts = () => {
   src(path.src.fonts)
     .pipe(ttf2woff())
     .pipe(dest(path.build.fonts))
@@ -112,7 +113,7 @@ function fonts(params) {
     .pipe(dest(path.build.fonts))
 }
 
-function browserSync(params) {
+const browserSync = () => {
   browsersync.init({
     server: {
       baseDir: "./" + projectFolder + "/"
@@ -122,42 +123,38 @@ function browserSync(params) {
   })
 }
 
-function fontsStyle(params) {
-
-  let file_content = fs.readFileSync(sourceFolder + '/scss/fonts.scss');
-  if (file_content == '') {
-    fs.writeFile(sourceFolder + '/scss/fonts.scss', '', cb);
-    return fs.readdir(path.build.fonts, function (err, items) {
+const fontsStyle = () => {
+  const fileContent = fs.readFileSync(sourceFolder + '/scss/fonts.scss')
+  if (fileContent == '') {
+    fs.writeFile(sourceFolder + '/scss/fonts.scss', '')
+    return fs.readdir(path.build.fonts, (err, items) => {
       if (items) {
-        let c_fontname;
-        for (var i = 0; i < items.length; i++) {
-          let fontname = items[i].split('.');
-          fontname = fontname[0];
-          if (c_fontname != fontname) {
-            fs.appendFile(sourceFolder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
+        let cFontname;
+        for (var i = 0; i < items.length; i += 1) {
+          const fontname = items[i].split('.')
+          [ fontname ] = fontname
+          if (cFontname != fontname) {
+            fs.appendFile(sourceFolder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n')
           }
-          c_fontname = fontname;
+          cFontname = fontname
         }
       }
     })
   }
 }
 
-function cb() {}
-
-function watchFiles(params) {
+const watchFiles = () => {
   gulp.watch([path.watch.html], html)
   gulp.watch([path.watch.css], css)
   gulp.watch([path.watch.img], images)
 }
 
-function clean(params) {
-  return del(path.clean)
-}
+const clean = () => del(path.clean)
 
-const build = gulp.series(clean, gulp.parallel(css, html, images, fonts), fontsStyle)
+const build = gulp.series(clean, gulp.parallel(css, html, images, fonts, favicons), fontsStyle)
 const watch = gulp.parallel(build, watchFiles, browserSync);
 
+exports.favicons = favicons;
 exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
 exports.images = images;
