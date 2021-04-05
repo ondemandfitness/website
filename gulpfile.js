@@ -123,26 +123,6 @@ const browserSync = () => {
   })
 }
 
-const fontsStyle = () => {
-  const fileContent = fs.readFileSync(sourceFolder + '/scss/fonts.scss')
-  if (fileContent == '') {
-    fs.writeFile(sourceFolder + '/scss/fonts.scss', '')
-    return fs.readdir(path.build.fonts, (err, items) => {
-      if (items) {
-        let cFontname;
-        for (var i = 0; i < items.length; i += 1) {
-          const fontname = items[i].split('.')
-          [ fontname ] = fontname
-          if (cFontname != fontname) {
-            fs.appendFile(sourceFolder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n')
-          }
-          cFontname = fontname
-        }
-      }
-    })
-  }
-}
-
 const watchFiles = () => {
   gulp.watch([path.watch.html], html)
   gulp.watch([path.watch.css], css)
@@ -151,11 +131,11 @@ const watchFiles = () => {
 
 const clean = () => del(path.clean)
 
-const build = gulp.series(clean, gulp.parallel(css, html, images, fonts, favicons), fontsStyle)
+const build = gulp.series(clean, gulp.parallel(css, html, images, fonts, favicons))
+
 const watch = gulp.parallel(build, watchFiles, browserSync);
 
 exports.favicons = favicons;
-exports.fontsStyle = fontsStyle;
 exports.fonts = fonts;
 exports.images = images;
 exports.css = css;
