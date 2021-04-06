@@ -22,6 +22,6 @@ jobs:
       # Overwrite dosc folder with new build
       - name: Run a multi-line script
         run: |
-          mv cp docs/CNAME dist/CNAME
+          cp docs/CNAME dist/CNAME
           ls dist
         
