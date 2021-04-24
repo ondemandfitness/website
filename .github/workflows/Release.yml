@@ -24,11 +24,7 @@ jobs:
           cp docs/CNAME dist/CNAME
           rm -rf docs
           mv dist docs
-          
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: gh-pages
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with: 
